@@ -74,7 +74,7 @@ function Modals(props:any) {
         Create Project
       </Button>
     </Form>
-    <TiptapEditor/>
+    
     </div>
     </Formik>
     

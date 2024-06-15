@@ -4,10 +4,11 @@ import React from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
-const TiptapEditor = () => {
+const TiptapEditor = (props:any) => {
+    const {notes}=props
   const editor = useEditor({
     extensions: [StarterKit],
-    content: '<p>Hello, Tiptap with Tailwind!</p>',
+    content: notes?`<p>${notes}</p>`:'<p>Your Notes go here!</p>',
   });
 
   if (!editor) {

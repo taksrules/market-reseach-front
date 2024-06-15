@@ -114,16 +114,16 @@ function Dashboard() {
   return (
     <TopNav>
       <div className="flex flex-col">
-        <div className="flex flex-row justify-between">
-          <h5>Projects</h5>
+        <div className="flex flex-row justify-between p-3">
+          <h5 className="text-2xl font-bold">Projects</h5>
           <Modals />
         </div>
-        <div className="grid w-full grid-cols-3 gap-4 bg-white">
+        <div className="grid w-full grid-cols-3 gap-4 bg-white ">
           <div className="w-full text-center font-bold">Started</div>
           <div className="w-full text-center font-bold">In Progress</div>
           <div className="w-full text-center font-bold">Completed</div>
 
-          <ul className="list-none">
+          <ul className="list-none rounded-lg shadow-md  items-center">
             {projects
               .filter((project) => project.status === "started")
               .map((project) => (
@@ -172,7 +172,7 @@ function Dashboard() {
               ))}
           </ul>
 
-          <ul className="list-none">
+          <ul className="list-none rounded-lg shadow-md items-center">
             {projects
               .filter((project) => project.status === "inprogress")
               .map((project) => (
@@ -184,37 +184,44 @@ function Dashboard() {
                   onDrop={(event) => handleDrop(event, "inprogress")}
                 >
                   <Card className="max-w-sm">
-                    <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      {project.title}
-                    </h5>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">
+                    <div className="flex flex-row justify-between">
+                      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        {project.title}
+                      </h5>
+                      <Link
+                        to={`/Projects/${project.id}`}
+                        key={project.id}
+                        className="flex justify-center"
+                      >
+                        <Button color="light" size="xs">
+                          View Tasks
+                        </Button>
+                      </Link>
+                    </div>
+
+                    <p className="gap-3 font-normal text-gray-700 dark:text-gray-400">
                       {project.description}
                     </p>
                     <span className="text-sm text-gray-500 dark:text-gray-400">
                       {convertDateFormat(project.dueDate)}
                     </span>
                     <span className="text-sm text-gray-500 dark:text-gray-400">
-                      <Badge color="success">{project.status}</Badge>
+                      <Badge color="info">{project.status}</Badge>
+                      <div>
+                        <Button
+                          onClick={() => handleDelete(project.id)}
+                          size="xs"
+                        >
+                          Delete
+                        </Button>
+                      </div>
                     </span>
-                    <Link
-                      to={`/Projects/${project.id}`}
-                      key={project.id}
-                      className="flex justify-center"
-                    >
-                      <Button size="xs" color="light">
-                        View Tasks
-                      </Button>
-                    </Link>
-
-                    <Button onClick={() => handleDelete(project.id)} size="xs">
-                      Delete
-                    </Button>
                   </Card>
                 </li>
               ))}
           </ul>
 
-          <ul className="list-none">
+          <ul className="list-none rounded-lg shadow-md items-center">
             {projects
               .filter((project) => project.status === "completed")
               .map((project) => (
@@ -225,9 +232,11 @@ function Dashboard() {
                   onDragOver={(event) => handleDragOver(event, "completed")}
                   onDrop={(event) => handleDrop(event, "completed")}
                 >
-                  <Card className="max-w-sm">
-                    <h5 className="flex flex-col justify-between text-2xl font-bold tracking-tight text-gray-900 dark:text-white ">
-                      {project.title}
+                   <Card className="max-w-sm">
+                    <div className="flex flex-row justify-between">
+                      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        {project.title}
+                      </h5>
                       <Link
                         to={`/Projects/${project.id}`}
                         key={project.id}
@@ -237,20 +246,25 @@ function Dashboard() {
                           View Tasks
                         </Button>
                       </Link>
-                    </h5>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">
+                    </div>
+
+                    <p className="gap-3 font-normal text-gray-700 dark:text-gray-400">
                       {project.description}
                     </p>
                     <span className="text-sm text-gray-500 dark:text-gray-400">
                       {convertDateFormat(project.dueDate)}
                     </span>
                     <span className="text-sm text-gray-500 dark:text-gray-400">
-                      <Badge color="dark">{project.status}</Badge>
+                      <Badge color="info">{project.status}</Badge>
+                      <div>
+                        <Button
+                          onClick={() => handleDelete(project.id)}
+                          size="xs"
+                        >
+                          Delete
+                        </Button>
+                      </div>
                     </span>
-
-                    <Button onClick={() => handleDelete(project.id)} size="xs">
-                      Delete
-                    </Button>
                   </Card>
                 </li>
               ))}

@@ -4,12 +4,15 @@ import Modals from "./Modals";
 import axios, { AxiosResponse } from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Table } from "flowbite-react";
-
+import { Tabs } from "flowbite-react";
+import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
+import { MdDashboard } from "react-icons/md"
 
 import { Link, useParams } from "react-router-dom";
 
 import AddTask from "./addTask";
 import EditTask from "./editTask";
+import TiptapEditor from "./editor";
 
 interface Task {
   id: number;
@@ -77,11 +80,15 @@ function Board(props: any) {
 
   return (
     <div className="flex flex-col">
-      <div className="p-2">
+      <div className="p-2 gap-2">
         <ToastContainer />
         <AddTask projectId={projectId}/>
       </div>
       <div className="overflow-x-auto">
+      
+      
+      <Tabs aria-label="Default tabs" style="default">
+      <Tabs.Item active title="Tasks" icon={HiUserCircle}>
       <Table striped>
         <Table.Head>
           <Table.HeadCell>Title</Table.HeadCell>
@@ -113,6 +120,14 @@ function Board(props: any) {
           
         </Table.Body>
       </Table>
+      </Tabs.Item>
+      <Tabs.Item title="Notes" icon={MdDashboard}>
+      <TiptapEditor />
+      </Tabs.Item>
+      
+      
+    </Tabs>
+
     </div>
 
     </div>
