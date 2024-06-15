@@ -5,6 +5,8 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios, { AxiosResponse } from 'axios';
 
+
+
 interface Project {
   title: string;
   description: string;
@@ -56,6 +58,7 @@ function Modals(props:any) {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
+      <div>
       <Form className="min-w-[400px] w-full mx-auto  p-8 px-8 rounded-lg flex flex-col space-y-1 text-sm">
       <Field name="title" type="text" placeholder="Title" />
       <Field name="description" type="text" placeholder="Description" />
@@ -66,11 +69,13 @@ function Modals(props:any) {
         <option value="completed">Completed</option>
         <option value="inprogress">Inprogress</option>
       </Field>
-      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+      <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
         Create Project
-      </button>
+      </Button>
     </Form>
+    </div>
     </Formik>
+    
 
         </Modal.Body>
         <Modal.Footer>

@@ -5,7 +5,7 @@ import SideBar from './SideBar';
 function TopNav(props:any) {
   return (
     <div className="flex flex-row  dark:bg-gray-700 dark:text-gray-400">
-      <div className="  ">
+      <div className=" h-screen ">
         <SideBar/>
       </div>
 

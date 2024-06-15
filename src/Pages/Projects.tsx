@@ -1,63 +1,74 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TopNav from "../Components/TopNav";
 import { Link, useParams } from "react-router-dom";
+import { Button, Card } from "flowbite-react";
 function Projects() {
-    interface Project {
-        id: number;
-        title: string;
-        description: string;
-        status: string;
-        dueDate: string;
-        notes: string;
-        researchFindings: string | null;
-        tasks: string | null;
+  interface Project {
+    id: number;
+    title: string;
+    description: string;
+    status: string;
+    dueDate: string;
+    notes: string;
+    researchFindings: string | null;
+    tasks: string | null;
+  }
+  const [projects, setProjects] = useState<Project[]>([]);
+  function convertDateFormat(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
+  }
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get<Project[]>(
+          "http://localhost:3000/projects",
+        );
+        setProjects(response.data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
       }
-      const [projects, setProjects] = useState<Project[]>([]);
-    useEffect(() => {
+    };
 
-        const fetchProjects = async () => {
-          try {
-            const response = await axios.get<Project[]>(
-              "http://localhost:3000/projects"
-            );
-            setProjects(response.data);
-          } catch (error) {
-            console.error("Error fetching projects:", error);
-          }
-        };
-    
-        fetchProjects();
-      }, []);
+    fetchProjects();
+  }, []);
   return (
     <TopNav>
-        <div className="text-xl font-bold">
-            Project
-        </div>
-    <div className="grid grid-cols-4 gap-2 w-full t ">
-         {projects
-              .filter((project) => project.status === "started")
-              .map((project) => (
-         <div className="flex flex-col items-center pb-10 w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                      <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                        {project.title}
-                      </h5>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {project.description}
-                      </span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {project.dueDate}
-                      </span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {project.status}
-                      </span>
-                    </div>
-              ))
-            }
-    </div>
+      <div className="text-xl font-bold flex justify-between w-full"><h5>Project</h5></div>
+      <div className="t grid w-full grid-cols-4 gap-2 ">
+        {projects
+          .filter((project) => project.status === "started")
+          .map((project) => (
+           
+              
+              <Card className="max-w-sm">
+                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {project.title}
+                </h5>
+                <p className="font-normal text-gray-700 dark:text-gray-400">
+                  {project.description}
+                </p>
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                {convertDateFormat(project.dueDate)}
+                </span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">
+                  {project.status}
+                </span>
+                <Button>
+                  Delete
+                  
+                </Button>
+              </Card>
+           
+          ))}
+      </div>
     </TopNav>
-  )
+  );
 }
 
-export default Projects
+export default Projects;

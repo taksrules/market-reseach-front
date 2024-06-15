@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Sidebar } from "flowbite-react";
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser } from "react-icons/hi"
-import { Link } from 'react-router-dom';
+import { Link ,NavLink} from 'react-router-dom';
 
 
 function SideBar() {
+  const [open, setOpen] = useState(true);
   return (
     <Sidebar aria-label="Sidebar with multi-level dropdown example" color='#4da890'>
       <Sidebar.Items>
@@ -25,6 +26,7 @@ function SideBar() {
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>
+    
   )
 }
 

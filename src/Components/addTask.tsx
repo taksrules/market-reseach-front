@@ -21,10 +21,10 @@ const validationSchema = Yup.object({
   notes: Yup.string().optional(),
   status: Yup.string().oneOf(['started', 'completed', 'cancelled']).required('Status is required'),
 });
-function addTask(props:any) {
+function AddTask(props:any) {
   const [openModal, setOpenModal] = useState(false);
   const initialValues: Task = {
-    id: 0,
+    id: props.projectId,
     title: '',
     description: '',
     status: '',
@@ -42,14 +42,13 @@ function addTask(props:any) {
         values
       );
       console.log('Project created:', response.data);
-      resetForm();
+      
 
     } catch (error) {
       console.error('Error creating project:', error);
     }
   };
-
-
+  
   return (
     <>
       <Button onClick={() => setOpenModal(true)}>Add Task</Button>
@@ -61,7 +60,7 @@ function addTask(props:any) {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <form className="min-w-[400px] w-full mx-auto  p-8 px-8 rounded-lg flex flex-col space-y-1 text-sm">
+      <Form className="min-w-[400px] w-full mx-auto  p-8 px-8 rounded-lg flex flex-col space-y-1 text-sm">
       <Field name="title" type="text" placeholder="Title" />
       <Field name="description" type="text" placeholder="Description" />
       <Field name="dueDate" type="date" />
@@ -74,7 +73,7 @@ function addTask(props:any) {
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
         Create Project
       </button>
-    </form>
+    </Form>
     </Formik>
 
         </Modal.Body>
@@ -89,7 +88,7 @@ function addTask(props:any) {
   );
 }
 
-export default addTask
+export default AddTask
 
 function resetForm() {
   throw new Error("Function not implemented.");
