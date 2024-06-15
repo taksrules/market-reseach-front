@@ -6,6 +6,7 @@ import { FaPenToSquare } from "react-icons/fa6";
 import { Button, Card } from "flowbite-react";
 import EditProject from "../Components/EditProject";
 
+
 function Projects() {
   interface Project {
     id: number;
@@ -65,7 +66,6 @@ function Projects() {
                 </span>
                 <Button>
                   Delete
-                  
                 </Button>
               </Card>
               </div>

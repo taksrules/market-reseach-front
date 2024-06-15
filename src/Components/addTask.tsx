@@ -53,7 +53,7 @@ function AddTask(props:any) {
     <>
       <Button onClick={() => setOpenModal(true)}>Add Task</Button>
       <Modal show={openModal} onClose={() => setOpenModal(false)}>
-        <Modal.Header>Add Project</Modal.Header>
+        <Modal.Header>Add Task</Modal.Header>
         <Modal.Body>
         <Formik
       initialValues={initialValues}

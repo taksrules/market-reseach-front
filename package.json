@@ -27,6 +27,9 @@
   },
   "dependencies": {
     "@syncfusion/ej2-react-kanban": "^26.1.35",
+    "@tiptap/pm": "^2.4.0",
+    "@tiptap/react": "^2.4.0",
+    "@tiptap/starter-kit": "^2.4.0",
     "flowbite-react": "^0.8.0",
     "formik": "^2.4.6",
     "quill": "^2.0.2",

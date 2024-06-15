@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios, { AxiosResponse } from 'axios';
+import TiptapEditor from "./editor";
 
 
 
@@ -73,6 +74,7 @@ function Modals(props:any) {
         Create Project
       </Button>
     </Form>
+    <TiptapEditor/>
     </div>
     </Formik>
     

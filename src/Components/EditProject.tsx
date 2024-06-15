@@ -5,6 +5,9 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios, { AxiosResponse } from 'axios';
 import { FaPenToSquare } from "react-icons/fa6";
+import Tiptap from "./editor";
+import { toast } from "react-toastify";
+
 ;
 interface Project {
     title: string;
@@ -42,14 +45,14 @@ function EditProject(props:any) {
       status: project.status,
     };
     
-    
+    const notify = () => toast("Edit Successiful!");
     const handleSubmit = async (values: Project) => {
         try {
           const response: AxiosResponse<Project> = await axios.patch(
             `http://localhost:3000/projects/${project.id}`,
             values
           );
-          console.log('Project created:', response.data);
+          notify();
           setOpenModal(false);
     
         } catch (error) {
@@ -84,6 +87,7 @@ function EditProject(props:any) {
     </Form>
     </div>
     </Formik>
+    <Tiptap/>
     
 
         </Modal.Body>

@@ -5,10 +5,11 @@ import axios, { AxiosResponse } from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Table } from "flowbite-react";
 
-import { useState } from "react";
+
 import { Link, useParams } from "react-router-dom";
-import TaskManagementApp from "./kanban";
+
 import AddTask from "./addTask";
+import EditTask from "./editTask";
 
 interface Task {
   id: number;
@@ -103,9 +104,9 @@ function Board(props: any) {
           <Table.Cell>{convertDateFormat(task.dueDate)}</Table.Cell>
           <Table.Cell>{task.notes}</Table.Cell>
           <Table.Cell>
-            <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-              Edit
-            </a>
+            <span  className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+              <EditTask task={task}/>
+            </span>
           </Table.Cell>
         </Table.Row>
         ))}
