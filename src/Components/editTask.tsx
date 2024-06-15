@@ -52,6 +52,7 @@ function EditTask(props:any) {
               `http://localhost:3000/task/${task.id}`,
               values
             );
+            setOpenModal(false)
         console.log('Project created:', response.data);
         
   

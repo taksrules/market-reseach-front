@@ -41,6 +41,7 @@ function AddTask(props:any) {
         'http://localhost:3000/task',
         values
       );
+      setOpenModal(false)
       console.log('Project created:', response.data);
       
 
