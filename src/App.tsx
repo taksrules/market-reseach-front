@@ -1,6 +1,7 @@
 import { DarkThemeToggle } from "flowbite-react";
 import {BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Board from "./Components/Board";
 import TopNav from "./Components/TopNav";
 import Dashboard from "./Pages/Dashboard";

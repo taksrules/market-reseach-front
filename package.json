@@ -29,6 +29,7 @@
     "@syncfusion/ej2-react-kanban": "^26.1.35",
     "flowbite-react": "^0.8.0",
     "formik": "^2.4.6",
+    "quill": "^2.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",

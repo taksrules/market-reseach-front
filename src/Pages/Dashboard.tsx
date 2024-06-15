@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { Button, Card ,Badge} from "flowbite-react";
 import Modals from "../Components/Modals";
+import { deleteProject } from "../api";
 
 interface Project {
   id: number;
@@ -40,15 +41,15 @@ function Dashboard() {
         );
         setProjects(response.data);
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        
       }
     };
 
     fetchProjects();
   }, [projects]);
 
-  const handleDelete=()=>{
-    
+  const handleDelete= async (id:any)=>{
+    await deleteProject(id)
   }
 
   const handleDragStart = (id: number) => {
@@ -138,9 +139,9 @@ function Dashboard() {
                   <Badge color="info">{project.status}</Badge>
                 </span>
                 <Link to={`/Projects/${project.id}`} key={project.id} className="flex justify-center"><Button color="light">View Tasks</Button></Link>
-                <Button>
+                <Button onClick={()=>handleDelete(project.id)}>
                   Delete
-                  
+                
                 </Button>
               </Card>
                     
@@ -153,7 +154,7 @@ function Dashboard() {
             {projects
               .filter((project) => project.status === "inprogress")
               .map((project) => (
-                <Link to={`/Projects/${project.id}`} key={project.id}>
+               
                   <li
                     className="mb-2 w-full max-w-sm cursor-move rounded-lg border-teal-200 bg-teal-600 p-4 shadow-md dark:border-gray-700 dark:bg-gray-800"
                     draggable={true}
@@ -182,7 +183,7 @@ function Dashboard() {
                 </Button>
               </Card>
                   </li>
-                </Link>
+                
               ))}
           </ul>
 
@@ -190,7 +191,7 @@ function Dashboard() {
             {projects
               .filter((project) => project.status === "completed")
               .map((project) => (
-                <Link to={`/Projects/${project.id}`} key={project.id}>
+                
                   <li
                     className="mb-2 w-full max-w-sm cursor-move rounded-lg border-teal-200 bg-teal-600 p-4 shadow-md dark:border-gray-700 dark:bg-gray-800"
                     draggable={true}
@@ -218,7 +219,7 @@ function Dashboard() {
                 </Button>
               </Card>
                   </li>
-                </Link>
+             
               ))}
           </ul>
         </div>
